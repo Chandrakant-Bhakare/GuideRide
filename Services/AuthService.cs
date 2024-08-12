@@ -20,7 +20,7 @@ public class AuthService
         var claims = new[]
         {
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new Claim(ClaimTypes.Name, user.Username),
+            new Claim(ClaimTypes.Name, user.Name), // Updated from Username to Name
             new Claim(ClaimTypes.Role, user.Role)
         };
 
@@ -39,13 +39,13 @@ public class AuthService
 
     public string HashPassword(string password)
     {
-        // Use BCrypt.Net directly without 'Net' reference
+        // Hash the password using BCrypt
         return BCrypt.Net.BCrypt.HashPassword(password);
     }
 
     public bool VerifyPassword(string hashedPassword, string password)
     {
-        // Use BCrypt.Net directly without 'Net' reference
+        // Verify the password using BCrypt
         return BCrypt.Net.BCrypt.Verify(password, hashedPassword);
     }
 }

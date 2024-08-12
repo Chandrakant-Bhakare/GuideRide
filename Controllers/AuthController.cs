@@ -1,8 +1,7 @@
 ﻿using GuideRide.Data;
+using GuideRide.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
-
 
 namespace GuideRide.Controllers
 {
@@ -23,7 +22,7 @@ namespace GuideRide.Controllers
         public async Task<IActionResult> Login(LoginRequest loginRequest)
         {
             var user = await _context.Users
-                .FirstOrDefaultAsync(u => u.Username == loginRequest.Username);
+                .FirstOrDefaultAsync(u => u.Email == loginRequest.Email);
 
             if (user == null || !_authService.VerifyPassword(user.PasswordHash, loginRequest.Password))
             {
@@ -38,16 +37,19 @@ namespace GuideRide.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterRequest registerRequest)
         {
-            if (await _context.Users.AnyAsync(u => u.Username == registerRequest.Username))
+            if (await _context.Users.AnyAsync(u => u.Email == registerRequest.Email))
             {
-                return Conflict("Username already exists");
+                return Conflict("Email already exists");
             }
 
             var user = new User
             {
-                Username = registerRequest.Username,
+                Name = registerRequest.Name,
+                Email = registerRequest.Email,
                 PasswordHash = _authService.HashPassword(registerRequest.Password),
-                Role = registerRequest.Role
+                Role = registerRequest.Role,
+                Address = registerRequest.Address,
+                DateOfBirth = registerRequest.DateOfBirth
             };
 
             _context.Users.Add(user);
@@ -59,14 +61,17 @@ namespace GuideRide.Controllers
 
     public class LoginRequest
     {
-        public string Username { get; set; }
+        public string Email { get; set; }
         public string Password { get; set; }
     }
 
     public class RegisterRequest
     {
-        public string Username { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
         public string Password { get; set; }
         public string Role { get; set; }
+        public string? Address { get; set; }
+        public DateTime DateOfBirth { get; set; }
     }
 }

@@ -30,8 +30,11 @@ public class UserController : ControllerBase
 
         var user = new User
         {
-            Username = registerDto.Username,
-            PasswordHash = registerDto.Password // Hash passwords in production
+            Name = registerDto.Name,
+            PasswordHash = registerDto.Password, // Hash passwords in production
+            Email = registerDto.Email,
+            Address = registerDto.Address,
+            DateOfBirth = registerDto.DateOfBirth
         };
 
         _context.Users.Add(user);
@@ -45,11 +48,11 @@ public class UserController : ControllerBase
     public IActionResult Login([FromBody] LoginDto loginDto)
     {
         var user = _context.Users
-            .FirstOrDefault(u => u.Username == loginDto.Username && u.PasswordHash == loginDto.Password); // Hash password check
+            .FirstOrDefault(u => u.Email == loginDto.Email && u.PasswordHash == loginDto.Password); // Hash password check
 
         if (user == null)
         {
-            return Unauthorized(new { message = "Invalid username or password" });
+            return Unauthorized(new { message = "Invalid email or password" });
         }
 
         var token = _authService.GenerateToken(user);
@@ -94,6 +97,10 @@ public class UserController : ControllerBase
 
         // Update user details
         user.PasswordHash = updateUserDto.Password; // Hash password in production
+        user.Name = updateUserDto.Name;
+        user.Email = updateUserDto.Email;
+        user.Address = updateUserDto.Address;
+        user.DateOfBirth = updateUserDto.DateOfBirth;
 
         _context.Users.Update(user);
         await _context.SaveChangesAsync();
@@ -192,8 +199,8 @@ public class UserController : ControllerBase
         {
             BookingId = booking.Id,
             GuideName = booking.Guide.Name,
-            CarModel = booking.Car.Model,
-            CustomerName = booking.Customer.Username, // Assuming Username for simplicity
+            CarModel = booking.Car.ModelName,
+            CustomerName = booking.Customer.Name, // Assuming Name for simplicity
             Amount = booking.TotalAmount,
             Date = booking.Date
         };

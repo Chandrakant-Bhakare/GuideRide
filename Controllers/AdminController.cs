@@ -3,6 +3,9 @@ using GuideRide.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
+using System.Linq;
 
 [ApiController]
 [Route("api/admin/[controller]")]
@@ -10,10 +13,12 @@ using Microsoft.EntityFrameworkCore;
 public class AdminController : ControllerBase
 {
     private readonly GuideRideContext _context;
+    private readonly ILogger<AdminController> _logger;
 
-    public AdminController(GuideRideContext context)
+    public AdminController(GuideRideContext context, ILogger<AdminController> logger)
     {
         _context = context;
+        _logger = logger;
     }
 
     // **Guide CRUD Operations**
@@ -26,10 +31,17 @@ public class AdminController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        _context.Guides.Add(guide);
-        await _context.SaveChangesAsync();
-
-        return CreatedAtAction(nameof(GetGuideById), new { id = guide.Id }, guide);
+        try
+        {
+            _context.Guides.Add(guide);
+            await _context.SaveChangesAsync();
+            return CreatedAtAction(nameof(GetGuideById), new { id = guide.Id }, guide);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred while creating a guide.");
+            return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while creating the guide.");
+        }
     }
 
     [HttpGet("guides/{id}")]
@@ -60,11 +72,11 @@ public class AdminController : ControllerBase
             return BadRequest();
         }
 
-        _context.Entry(guide).State = EntityState.Modified;
-
         try
         {
+            _context.Entry(guide).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+            return NoContent();
         }
         catch (DbUpdateConcurrencyException)
         {
@@ -77,8 +89,11 @@ public class AdminController : ControllerBase
                 throw;
             }
         }
-
-        return NoContent();
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred while updating the guide.");
+            return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while updating the guide.");
+        }
     }
 
     [HttpDelete("guides/{id}")]
@@ -90,10 +105,17 @@ public class AdminController : ControllerBase
             return NotFound();
         }
 
-        _context.Guides.Remove(guide);
-        await _context.SaveChangesAsync();
-
-        return NoContent();
+        try
+        {
+            _context.Guides.Remove(guide);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred while deleting the guide.");
+            return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while deleting the guide.");
+        }
     }
 
     private bool GuideExists(int id)
@@ -111,10 +133,17 @@ public class AdminController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        _context.Cars.Add(car);
-        await _context.SaveChangesAsync();
-
-        return CreatedAtAction(nameof(GetCarById), new { id = car.Id }, car);
+        try
+        {
+            _context.Cars.Add(car);
+            await _context.SaveChangesAsync();
+            return CreatedAtAction(nameof(GetCarById), new { id = car.Id }, car);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred while creating a car.");
+            return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while creating the car.");
+        }
     }
 
     [HttpGet("cars/{id}")]
@@ -145,11 +174,11 @@ public class AdminController : ControllerBase
             return BadRequest();
         }
 
-        _context.Entry(car).State = EntityState.Modified;
-
         try
         {
+            _context.Entry(car).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+            return NoContent();
         }
         catch (DbUpdateConcurrencyException)
         {
@@ -162,8 +191,11 @@ public class AdminController : ControllerBase
                 throw;
             }
         }
-
-        return NoContent();
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred while updating the car.");
+            return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while updating the car.");
+        }
     }
 
     [HttpDelete("cars/{id}")]
@@ -175,10 +207,17 @@ public class AdminController : ControllerBase
             return NotFound();
         }
 
-        _context.Cars.Remove(car);
-        await _context.SaveChangesAsync();
-
-        return NoContent();
+        try
+        {
+            _context.Cars.Remove(car);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred while deleting the car.");
+            return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while deleting the car.");
+        }
     }
 
     private bool CarExists(int id)
