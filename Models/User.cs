@@ -23,4 +23,5 @@ public class User
     [Required]
     [DataType(DataType.Date)]
     public DateTime? DateOfBirth { get; set; }
+   
 }

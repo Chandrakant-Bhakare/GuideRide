@@ -1,19 +1,18 @@
-﻿using GuideRide.Models;
-using System;
-
-public class Booking
+﻿namespace GuideRide.Models
 {
-    public int Id { get; set; }
+    public class Booking
+    {
+        public int Id { get; set; }
+        public int CustomerId { get; set; }
+        public int CarId { get; set; }
+        public int GuideId { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public int NumberOfDays { get; set; }
+        public decimal TotalAmount { get; set; }
 
-    public int CustomerId { get; set; }
-    public User Customer { get; set; }
-
-    public int GuideId { get; set; }
-    public Guide Guide { get; set; }
-
-    public int CarId { get; set; }
-    public Car Car { get; set; }
-
-    public DateTime Date { get; set; }
-    public decimal TotalAmount { get; set; }
+        public User Customer { get; set; }
+        public Car Car { get; set; }
+        public Guide Guide { get; set; }
+    }
 }

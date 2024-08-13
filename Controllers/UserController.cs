@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GuideRide.Data;
 using GuideRide.Models;
+using GuideRide.Models.GuideRide.Dtos;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -35,6 +37,7 @@ public class UserController : ControllerBase
             Email = registerDto.Email,
             Address = registerDto.Address,
             DateOfBirth = registerDto.DateOfBirth
+     
         };
 
         _context.Users.Add(user);
@@ -129,9 +132,33 @@ public class UserController : ControllerBase
 
     // **Booking Operations**
 
+    // **Get Available Cars**
+    [HttpGet("available-cars")]
+    [Authorize]
+    public async Task<IActionResult> GetAvailableCars()
+    {
+        var availableCars = await _context.Cars
+            .Where(c => c.Status)
+            .ToListAsync();
+
+        return Ok(availableCars);
+    }
+
+    // **Get Available Guides**
+    [HttpGet("available-guides")]
+    [Authorize]
+    public async Task<IActionResult> GetAvailableGuides()
+    {
+        var availableGuides = await _context.Guides
+            .Where(g => g.Status)
+            .ToListAsync();
+
+        return Ok(availableGuides);
+    }
+
     [HttpPost("bookings")]
     [Authorize]
-    public async Task<IActionResult> CreateBooking([FromBody] Booking booking)
+    public async Task<IActionResult> CreateBooking([FromBody] BookingDto bookingDto)
     {
         if (!ModelState.IsValid)
         {
@@ -139,9 +166,40 @@ public class UserController : ControllerBase
         }
 
         var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-        booking.CustomerId = userId; // Assign booking to the logged-in user
+
+        // Check if the selected car and guide are available
+        var car = await _context.Cars.FirstOrDefaultAsync(c => c.Id == bookingDto.CarId && c.Status);
+        var guide = await _context.Guides.FirstOrDefaultAsync(g => g.Id == bookingDto.GuideId && g.Status);
+
+        if (car == null || guide == null)
+        {
+            return BadRequest(new { message = "Selected car or guide is not available" });
+        }
+
+        // Calculate number of days and total amount
+        var numberOfDays = (bookingDto.EndDate - bookingDto.StartDate).Days;
+        var carFare = car.Fare;
+        var guideFare = guide.Fare;
+        var totalAmount = (carFare + guideFare) * numberOfDays + 200; // 200 is the platform fee
+
+        // Create the booking
+        var booking = new Booking
+        {
+            CustomerId = userId,
+            CarId = car.Id,
+            GuideId = guide.Id,
+            StartDate = bookingDto.StartDate,
+            EndDate = bookingDto.EndDate,
+            NumberOfDays = numberOfDays,
+            TotalAmount = totalAmount
+        };
 
         _context.Bookings.Add(booking);
+
+        // Mark the car and guide as unavailable
+        car.Status = false;
+        guide.Status = false;
+
         await _context.SaveChangesAsync();
 
         return CreatedAtAction(nameof(GetBookingById), new { id = booking.Id }, booking);
@@ -173,7 +231,6 @@ public class UserController : ControllerBase
     }
 
     // **Bill Generation**
-
     [HttpGet("bills/{bookingId}")]
     [Authorize]
     public async Task<IActionResult> GenerateBill(int bookingId)
@@ -200,9 +257,15 @@ public class UserController : ControllerBase
             BookingId = booking.Id,
             GuideName = booking.Guide.Name,
             CarModel = booking.Car.ModelName,
-            CustomerName = booking.Customer.Name, // Assuming Name for simplicity
-            Amount = booking.TotalAmount,
-            Date = booking.Date
+            CustomerName = booking.Customer.Name,
+            StartDate = booking.StartDate,
+            EndDate = booking.EndDate,
+            NumberOfDays = booking.NumberOfDays,
+            CarFarePerDay = booking.Car.Fare,
+            GuideFarePerDay = booking.Guide.Fare,
+            PlatformFee = 200,
+            TotalAmount = booking.TotalAmount,
+            Date = booking.StartDate
         };
 
         return Ok(bill);

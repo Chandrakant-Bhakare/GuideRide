@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GuideRide.Migrations
 {
     [DbContext(typeof(GuideRideContext))]
-    [Migration("20240812140031_initialcreate")]
+    [Migration("20240813115754_initialcreate")]
     partial class initialcreate
     {
         /// <inheritdoc />
@@ -24,40 +24,6 @@ namespace GuideRide.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
-
-            modelBuilder.Entity("Booking", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("GuideId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("TotalAmount")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CarId");
-
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("GuideId");
-
-                    b.ToTable("Bookings");
-                });
 
             modelBuilder.Entity("Guide", b =>
                 {
@@ -104,6 +70,46 @@ namespace GuideRide.Migrations
                     b.HasIndex("BookingId");
 
                     b.ToTable("Bills");
+                });
+
+            modelBuilder.Entity("GuideRide.Models.Booking", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("GuideId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumberOfDays")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CarId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("GuideId");
+
+                    b.ToTable("Bookings");
                 });
 
             modelBuilder.Entity("GuideRide.Models.Car", b =>
@@ -180,7 +186,18 @@ namespace GuideRide.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Booking", b =>
+            modelBuilder.Entity("GuideRide.Models.Bill", b =>
+                {
+                    b.HasOne("GuideRide.Models.Booking", "Booking")
+                        .WithMany()
+                        .HasForeignKey("BookingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Booking");
+                });
+
+            modelBuilder.Entity("GuideRide.Models.Booking", b =>
                 {
                     b.HasOne("GuideRide.Models.Car", "Car")
                         .WithMany()
@@ -205,17 +222,6 @@ namespace GuideRide.Migrations
                     b.Navigation("Customer");
 
                     b.Navigation("Guide");
-                });
-
-            modelBuilder.Entity("GuideRide.Models.Bill", b =>
-                {
-                    b.HasOne("Booking", "Booking")
-                        .WithMany()
-                        .HasForeignKey("BookingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Booking");
                 });
 #pragma warning restore 612, 618
         }
