@@ -11,8 +11,12 @@
         public int NumberOfDays { get; set; }
         public decimal TotalAmount { get; set; }
 
+        // Navigation properties
         public User Customer { get; set; }
         public Car Car { get; set; }
         public Guide Guide { get; set; }
+
+        // New relationship with Feedback
+        public Feedback Feedback { get; set; }
     }
 }

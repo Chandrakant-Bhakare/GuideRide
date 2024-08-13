@@ -37,7 +37,7 @@ public class UserController : ControllerBase
             Email = registerDto.Email,
             Address = registerDto.Address,
             DateOfBirth = registerDto.DateOfBirth
-     
+
         };
 
         _context.Users.Add(user);
@@ -270,4 +270,41 @@ public class UserController : ControllerBase
 
         return Ok(bill);
     }
+
+    [HttpPost("feedback")]
+    [Authorize]
+    public async Task<IActionResult> SubmitFeedback([FromBody] FeedbackDto feedbackDto)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+        // Check if the booking exists and belongs to the logged-in user
+        var booking = await _context.Bookings
+            .Include(b => b.Customer)
+            .FirstOrDefaultAsync(b => b.Id == feedbackDto.BookingId);
+
+        if (booking == null || booking.CustomerId != userId)
+        {
+            return BadRequest(new { message = "Invalid booking ID or unauthorized access" });
+        }
+
+        // Create and save the feedback
+        var feedback = new Feedback
+        {
+            BookingId = feedbackDto.BookingId,
+            GuideRating = feedbackDto.GuideRating,
+            CarRating = feedbackDto.CarRating,
+            Comments = feedbackDto.Comments
+        };
+
+        _context.Feedbacks.Add(feedback);
+        await _context.SaveChangesAsync();
+
+        return Ok(new { message = "Feedback submitted successfully" });
+    }
 }
+
