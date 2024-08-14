@@ -3,12 +3,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using GuideRide.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
+// Configure the database context
 builder.Services.AddDbContext<GuideRideContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
-        new MySqlServerVersion(new Version(8, 0, 21)))); // Use the appropriate version
+        new MySqlServerVersion(new Version(8, 0, 21)))); // Use the appropriate MySQL version
 
+// Configure JWT authentication
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -27,27 +30,47 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+// Configure role-based authorization
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
 });
 
+// Register the AuthService
 builder.Services.AddScoped<AuthService>();
 
+// Enable CORS to allow requests from the Angular frontend
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:4200") // Angular app origin
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+});
+
+// Add controllers and Swagger
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+// Configure middleware
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
+// Enable CORS
+app.UseCors("AllowSpecificOrigin");
+
 app.UseHttpsRedirection();
 
+// Enable authentication and authorization
 app.UseAuthentication();
 app.UseAuthorization();
 
