@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.Options;
 using System.Text;
 using GuideRide.Data;
+using GuideRide.Services; // Make sure to import the namespace for your EmailService
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,6 +40,10 @@ builder.Services.AddAuthorization(options =>
 
 // Register the AuthService
 builder.Services.AddScoped<AuthService>();
+
+// Register the EmailService and configure settings
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("SmtpSettings"));
+builder.Services.AddScoped<EmailService>();
 
 // Enable CORS to allow requests from the Angular frontend
 builder.Services.AddCors(options =>
