@@ -31,8 +31,16 @@ namespace GuideRide.Controllers
 
             var token = _authService.GenerateToken(user);
 
-            return Ok(new { Token = token });
+            // Include the user role in the response
+            var response = new
+            {
+                Token = token,
+                Role = user.Role
+            };
+
+            return Ok(response);
         }
+
 
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterRequest registerRequest)
