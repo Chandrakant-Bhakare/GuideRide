@@ -191,7 +191,9 @@ public class UserController : ControllerBase
             StartDate = bookingDto.StartDate,
             EndDate = bookingDto.EndDate,
             NumberOfDays = numberOfDays,
-            TotalAmount = totalAmount
+            TotalAmount = totalAmount,
+            Bording = bookingDto.Bording, // New field
+            Destination = bookingDto.Destination // New field
         };
 
         _context.Bookings.Add(booking);
@@ -229,6 +231,29 @@ public class UserController : ControllerBase
 
         return Ok(booking);
     }
+    [HttpGet("bookings")]
+    [Authorize]
+    public async Task<IActionResult> GetAllBookings()
+    {
+        // Get the logged-in user's ID
+        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+        // Retrieve all bookings for the logged-in user
+        var bookings = await _context.Bookings
+            .Include(b => b.Customer)
+            .Include(b => b.Guide)
+            .Include(b => b.Car)
+            .Where(b => b.CustomerId == userId)
+            .ToListAsync();
+
+        if (bookings == null || !bookings.Any())
+        {
+            return NotFound(); // Return 404 if no bookings are found
+        }
+
+        return Ok(bookings);
+    }
+
 
     // **Bill Generation**
     [HttpGet("bills/{bookingId}")]

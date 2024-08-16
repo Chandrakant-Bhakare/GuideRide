@@ -11,6 +11,10 @@
         public int NumberOfDays { get; set; }
         public decimal TotalAmount { get; set; }
 
+        // New fields
+        public string Bording { get; set; }
+        public string Destination { get; set; }
+
         // Navigation properties
         public User Customer { get; set; }
         public Car Car { get; set; }

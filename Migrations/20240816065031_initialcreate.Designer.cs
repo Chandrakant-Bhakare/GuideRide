@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GuideRide.Migrations
 {
     [DbContext(typeof(GuideRideContext))]
-    [Migration("20240813173024_initialcreate")]
+    [Migration("20240816065031_initialcreate")]
     partial class initialcreate
     {
         /// <inheritdoc />
@@ -80,11 +80,19 @@ namespace GuideRide.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Bording")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<int>("CarId")
                         .HasColumnType("int");
 
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Destination")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime(6)");
