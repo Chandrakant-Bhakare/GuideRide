@@ -6,8 +6,6 @@
         public int GuideId { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-
-        // New fields
         public string Bording { get; set; }
         public string Destination { get; set; }
     }

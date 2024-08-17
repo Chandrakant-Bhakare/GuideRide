@@ -21,7 +21,6 @@ public class UserController : ControllerBase
         _authService = authService;
     }
 
-    // **Create (Register)**
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
     {
@@ -33,7 +32,7 @@ public class UserController : ControllerBase
         var user = new User
         {
             Name = registerDto.Name,
-            PasswordHash = registerDto.Password, // Hash passwords in production
+            PasswordHash = registerDto.Password, 
             Email = registerDto.Email,
             Address = registerDto.Address,
             DateOfBirth = registerDto.DateOfBirth
@@ -46,12 +45,12 @@ public class UserController : ControllerBase
         return Ok(new { message = "Registration successful" });
     }
 
-    // **Read (Login)**
+    
     [HttpPost("login")]
     public IActionResult Login([FromBody] LoginDto loginDto)
     {
         var user = _context.Users
-            .FirstOrDefault(u => u.Email == loginDto.Email && u.PasswordHash == loginDto.Password); // Hash password check
+            .FirstOrDefault(u => u.Email == loginDto.Email && u.PasswordHash == loginDto.Password); 
 
         if (user == null)
         {
@@ -62,13 +61,27 @@ public class UserController : ControllerBase
 
         return Ok(new { Token = token });
     }
+    
+    [HttpGet("users")]
+    [Authorize(Roles = "Admin")] 
+    public async Task<IActionResult> GetAllUsers()
+    {
+        var users = await _context.Users.ToListAsync();
 
-    // **Read (Get Profile)**
+        if (users == null || !users.Any())
+        {
+            return NotFound(new { message = "No users found" });
+        }
+
+        return Ok(users);
+    }
+
+   
     [HttpGet("profile")]
     [Authorize]
     public IActionResult GetProfile()
     {
-        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)); // Extract user ID from JWT
+        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)); 
 
         var user = _context.Users.Find(userId);
 
@@ -80,7 +93,7 @@ public class UserController : ControllerBase
         return Ok(user);
     }
 
-    // **Update User**
+   
     [HttpPut("update")]
     [Authorize]
     public async Task<IActionResult> UpdateUser([FromBody] UpdateUserDto updateUserDto)
@@ -98,8 +111,8 @@ public class UserController : ControllerBase
             return NotFound(new { message = "User not found" });
         }
 
-        // Update user details
-        user.PasswordHash = updateUserDto.Password; // Hash password in production
+       
+        user.PasswordHash = updateUserDto.Password; 
         user.Name = updateUserDto.Name;
         user.Email = updateUserDto.Email;
         user.Address = updateUserDto.Address;
@@ -111,7 +124,7 @@ public class UserController : ControllerBase
         return Ok(new { message = "User updated successfully" });
     }
 
-    // **Delete User**
+   
     [HttpDelete("delete")]
     [Authorize]
     public async Task<IActionResult> DeleteUser()
@@ -132,7 +145,6 @@ public class UserController : ControllerBase
 
     // **Booking Operations**
 
-    // **Get Available Cars**
     [HttpGet("available-cars")]
     [Authorize]
     public async Task<IActionResult> GetAvailableCars()
@@ -144,7 +156,7 @@ public class UserController : ControllerBase
         return Ok(availableCars);
     }
 
-    // **Get Available Guides**
+    
     [HttpGet("available-guides")]
     [Authorize]
     public async Task<IActionResult> GetAvailableGuides()
@@ -167,7 +179,7 @@ public class UserController : ControllerBase
 
         var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-        // Check if the selected car and guide are available
+        
         var car = await _context.Cars.FirstOrDefaultAsync(c => c.Id == bookingDto.CarId && c.Status);
         var guide = await _context.Guides.FirstOrDefaultAsync(g => g.Id == bookingDto.GuideId && g.Status);
 
@@ -176,13 +188,12 @@ public class UserController : ControllerBase
             return BadRequest(new { message = "Selected car or guide is not available" });
         }
 
-        // Calculate number of days and total amount
+   
         var numberOfDays = (bookingDto.EndDate - bookingDto.StartDate).Days;
         var carFare = car.Fare;
         var guideFare = guide.Fare;
-        var totalAmount = (carFare + guideFare) * numberOfDays + 200; // 200 is the platform fee
-
-        // Create the booking
+        var totalAmount = (carFare + guideFare) * numberOfDays + 200; 
+        
         var booking = new Booking
         {
             CustomerId = userId,
@@ -192,13 +203,13 @@ public class UserController : ControllerBase
             EndDate = bookingDto.EndDate,
             NumberOfDays = numberOfDays,
             TotalAmount = totalAmount,
-            Bording = bookingDto.Bording, // New field
-            Destination = bookingDto.Destination // New field
+            Bording = bookingDto.Bording, 
+            Destination = bookingDto.Destination 
         };
 
         _context.Bookings.Add(booking);
 
-        // Mark the car and guide as unavailable
+        
         car.Status = false;
         guide.Status = false;
 
@@ -226,7 +237,7 @@ public class UserController : ControllerBase
         var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
         if (booking.CustomerId != userId)
         {
-            return Forbid(); // Forbidden access
+            return Forbid(); 
         }
 
         return Ok(booking);
@@ -235,10 +246,10 @@ public class UserController : ControllerBase
     [Authorize]
     public async Task<IActionResult> GetAllBookings()
     {
-        // Get the logged-in user's ID
+        
         var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-        // Retrieve all bookings for the logged-in user
+        
         var bookings = await _context.Bookings
             .Include(b => b.Customer)
             .Include(b => b.Guide)
@@ -248,7 +259,7 @@ public class UserController : ControllerBase
 
         if (bookings == null || !bookings.Any())
         {
-            return NotFound(); // Return 404 if no bookings are found
+            return NotFound(); 
         }
 
         return Ok(bookings);
@@ -274,7 +285,7 @@ public class UserController : ControllerBase
         var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
         if (booking.CustomerId != userId)
         {
-            return Forbid(); // Forbidden access
+            return Forbid(); 
         }
 
         var bill = new

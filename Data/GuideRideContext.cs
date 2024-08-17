@@ -20,39 +20,39 @@ namespace GuideRide.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configure relationships and constraints for Booking
+            
             modelBuilder.Entity<Booking>()
                 .HasOne(b => b.Customer)
-                .WithMany() // You may want to specify a navigation property on User if it exists
+                .WithMany() 
                 .HasForeignKey(b => b.CustomerId)
-                .OnDelete(DeleteBehavior.Restrict); // Adjust behavior as needed
+                .OnDelete(DeleteBehavior.Restrict); 
 
             modelBuilder.Entity<Booking>()
                 .HasOne(b => b.Guide)
-                .WithMany() // You may want to specify a navigation property on Guide if it exists
+                .WithMany() 
                 .HasForeignKey(b => b.GuideId)
-                .OnDelete(DeleteBehavior.Restrict); // Adjust behavior as needed
+                .OnDelete(DeleteBehavior.Restrict); 
 
             modelBuilder.Entity<Booking>()
                 .HasOne(b => b.Car)
-                .WithMany() // You may want to specify a navigation property on Car if it exists
+                .WithMany() 
                 .HasForeignKey(b => b.CarId)
-                .OnDelete(DeleteBehavior.Restrict); // Adjust behavior as needed
+                .OnDelete(DeleteBehavior.Restrict); 
 
-            // Configure relationships and constraints for Feedback
+            
             modelBuilder.Entity<Feedback>()
                 .HasOne(f => f.Booking)
-                .WithOne(b => b.Feedback) // Assuming a Booking has one Feedback
+                .WithOne(b => b.Feedback) 
                 .HasForeignKey<Feedback>(f => f.BookingId)
-                .OnDelete(DeleteBehavior.Cascade); // Adjust as needed
+                .OnDelete(DeleteBehavior.Cascade); 
 
             modelBuilder.Entity<Feedback>()
                 .HasOne(f => f.User)
-                .WithMany() // Specify navigation property if User has a collection of Feedbacks
+                .WithMany() 
                 .HasForeignKey(f => f.UserId)
-                .OnDelete(DeleteBehavior.Restrict); // Adjust as needed
+                .OnDelete(DeleteBehavior.Restrict); 
 
-            // Configure unique constraints or indexes if needed
+            
             modelBuilder.Entity<User>()
                 .HasIndex(u => u.Email)
                 .IsUnique();
@@ -61,7 +61,7 @@ namespace GuideRide.Data
                 .HasIndex(c => c.RegistrationNumber)
                 .IsUnique();
 
-            // Add unique constraints for Query if needed
+            
         }
     }
 }

@@ -9,7 +9,7 @@ public class User
     public string Name { get; set; }
 
     [Required]
-    public string PasswordHash { get; set; } // Store hashed password
+    public string PasswordHash { get; set; } 
 
     public string Role { get; set; }
 

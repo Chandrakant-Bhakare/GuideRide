@@ -20,7 +20,7 @@ public class AuthService
         var claims = new[]
         {
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new Claim(ClaimTypes.Name, user.Name), // Updated from Username to Name
+            new Claim(ClaimTypes.Name, user.Name), 
             new Claim(ClaimTypes.Role, user.Role)
         };
 
@@ -31,7 +31,7 @@ public class AuthService
             issuer: _configuration["Jwt:Issuer"],
             audience: _configuration["Jwt:Audience"],
             claims: claims,
-            expires: DateTime.Now.AddHours(0.5),
+            expires: DateTime.Now.AddHours(1),
             signingCredentials: creds);
 
         return new JwtSecurityTokenHandler().WriteToken(token);
@@ -39,13 +39,13 @@ public class AuthService
 
     public string HashPassword(string password)
     {
-        // Hash the password using BCrypt
+        
         return BCrypt.Net.BCrypt.HashPassword(password);
     }
 
     public bool VerifyPassword(string hashedPassword, string password)
     {
-        // Verify the password using BCrypt
+        
         return BCrypt.Net.BCrypt.Verify(password, hashedPassword);
     }
 }

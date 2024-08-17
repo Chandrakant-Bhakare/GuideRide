@@ -3,8 +3,8 @@
     public class FeedbackDto
     {
         public int BookingId { get; set; }
-        public int GuideRating { get; set; } // Rating for the guide
-        public int CarRating { get; set; } // Rating for the car
-        public string Comments { get; set; } // Optional comments
+        public int GuideRating { get; set; } 
+        public int CarRating { get; set; } 
+        public string Comments { get; set; } 
     }
 }
