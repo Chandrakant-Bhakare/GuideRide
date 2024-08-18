@@ -1,0 +1,32 @@
+.payment-result-container {
+    text-align: center;
+    padding: 50px;
+    margin: 50px auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #e6ffe6;
+    max-width: 400px;
+  }
+  
+  .payment-result-container h2 {
+    color: #28a745;
+    margin-bottom: 20px;
+  }
+  
+  .payment-result-container p {
+    margin-bottom: 30px;
+  }
+  
+  .home-link {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    background-color: #007bff;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+  
+  .home-link:hover {
+    background-color: #0056b3;
+  }
+  

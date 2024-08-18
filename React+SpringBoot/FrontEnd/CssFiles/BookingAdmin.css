@@ -1,0 +1,83 @@
+/* BookingAdmin.css */
+
+.booking-controller {
+    width: 90%;
+    margin-left: 30px;
+    font-family: Arial, sans-serif;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .bookings-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .bookings-table thead {
+    background-color: #f2f2f2;
+  }
+  
+  .bookings-table th,
+  .bookings-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .bookings-table th {
+    background-color:rgb(93, 93, 215);
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  
+  .bookings-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .bookings-table tr:hover {
+    background-color: #ddd;
+  }
+  
+  .bookings-table td {
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .bookings-table .no-bookings {
+    text-align: center;
+    font-style: italic;
+    color: #666;
+  }
+  
+  /* Loading and Error Styles */
+  .loading,
+  .error {
+    text-align: center;
+    font-size: 18px;
+    margin: 20px 0;
+  }
+  
+  .error {
+    color: red;
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 768px) {
+    .booking-controller {
+      width: 100%;
+      padding: 0 10px;
+    }
+  
+    .bookings-table th, 
+    .bookings-table td {
+      padding: 6px;
+      font-size: 12px;
+    }
+  }
+  

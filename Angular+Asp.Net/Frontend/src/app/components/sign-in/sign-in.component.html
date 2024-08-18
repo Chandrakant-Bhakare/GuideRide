@@ -1,0 +1,71 @@
+<div class="signup-container">
+  <div class="form-section">
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <h2>Sign Up</h2>
+
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input id="name" formControlName="name" type="text" />
+        <div *ngIf="signupForm.get('name')?.invalid && (signupForm.get('name')?.touched || signupForm.get('name')?.dirty)">
+          <small *ngIf="signupForm.get('name')?.errors?.['required']">Name is required.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input id="email" formControlName="email" type="email" />
+        <div *ngIf="signupForm.get('email')?.invalid && (signupForm.get('email')?.touched || signupForm.get('email')?.dirty)">
+          <small *ngIf="signupForm.get('email')?.errors?.['required']">Email is required.</small>
+          <small *ngIf="signupForm.get('email')?.errors?.['email']">Invalid email format.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Set Password:</label>
+        <input id="password" formControlName="password" type="password" />
+        <div *ngIf="signupForm.get('password')?.invalid && (signupForm.get('password')?.touched || signupForm.get('password')?.dirty)">
+          <small *ngIf="signupForm.get('password')?.errors?.['required']">Password is required.</small>
+          <small *ngIf="signupForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters long.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="role">Role:</label>
+        <select id="role" formControlName="role">
+          <option value="" disabled>Select Role</option>
+          <option value="Admin">Admin</option>
+          <option value="User">User</option>
+        </select>
+        <div *ngIf="signupForm.get('role')?.invalid && (signupForm.get('role')?.touched || signupForm.get('role')?.dirty)">
+          <small *ngIf="signupForm.get('role')?.errors?.['required']">Role is required.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="address">Address:</label>
+        <input id="address" formControlName="address" type="text" />
+        <div *ngIf="signupForm.get('address')?.invalid && (signupForm.get('address')?.touched || signupForm.get('address')?.dirty)">
+          <small *ngIf="signupForm.get('address')?.errors?.['required']">Address is required.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="dateOfBirth">Date of Birth:</label>
+        <input id="dateOfBirth" formControlName="dateOfBirth" type="date" />
+        <div *ngIf="signupForm.get('dateOfBirth')?.invalid && (signupForm.get('dateOfBirth')?.touched || signupForm.get('dateOfBirth')?.dirty)">
+          <small *ngIf="signupForm.get('dateOfBirth')?.errors?.['required']">Date of birth is required.</small>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="signupForm.invalid">Sign Up</button>
+
+      <!-- Success message -->
+      <div *ngIf="registrationSuccessful" class="success-message">
+        Registration Successful!
+      </div>
+    </form>
+  </div>
+  <div class="image-section">
+    <!-- Image section content -->
+  </div>
+</div>

@@ -1,0 +1,103 @@
+/* Container for booking details component */
+.order-container {
+  padding: 20px;
+  background-color: #f4f4f9; /* Light gray background */
+  text-align: center; /* Center-align the content */
+  width: 100%;
+}
+
+/* Header styling */
+.order-container h1 {
+  color: #333; /* Dark gray text */
+  font-size: 2em;
+  margin-bottom: 30px;
+}
+
+/* Table styling */
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px;
+  background-color: #fff; /* White background for the table */
+  border-radius: 8px; /* Rounded corners */
+  overflow: hidden; /* Ensure rounded corners are visible */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  margin: 0 auto; /* Center the table horizontally */
+}
+
+/* Table header */
+.order-table th {
+  background: linear-gradient(to right, #007bff, #0056b3); /* Gradient blue background */
+  color: #fff;
+  padding: 15px;
+  text-align: left;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+/* Table cells */
+.order-table td {
+  padding: 15px;
+  border-bottom: 1px solid #ddd; /* Light gray border */
+  color: #333; /* Dark text color */
+  font-size: 16px;
+}
+
+/* Alternating row colors */
+.order-table tr:nth-child(even) {
+  background-color: #f9f9f9; /* Light gray for alternating rows */
+}
+
+/* Highlight row on hover */
+.order-table tr:hover {
+  background-color: #f1f1f1; /* Slightly darker gray */
+}
+
+/* Hover effect for table header */
+.order-table th:hover {
+  background: linear-gradient(to right, #0056b3, #007bff); /* Inverse gradient on hover */
+}
+
+/* Button styling */
+.home-link {
+  padding: 12px 24px;
+  background-color: #007bff; /* Blue background */
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.home-link:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .order-table, .order-table thead, .order-table tbody, .order-table th, .order-table td, .order-table tr {
+    display: block; /* Stack table rows on small screens */
+  }
+
+  .order-table tr {
+    margin-bottom: 15px;
+  }
+
+  .order-table td {
+    padding: 10px;
+    text-align: right;
+    position: relative;
+  }
+
+  .order-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 10px;
+    font-weight: bold;
+    text-align: left;
+  }
+}

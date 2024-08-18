@@ -1,0 +1,68 @@
+/* Guides.css */
+
+/* Container for guide cards */
+.guide-selection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 20px;
+  margin: 50px auto;
+  justify-content: center;
+}
+
+/* Individual guide card */
+.guide-card {
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem; /* Bootstrap's border-radius */
+  overflow: hidden;
+  width: 300px;
+  background-color: #ffffff;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  transition: box-shadow 0.3s ease;
+  padding: 1rem; /* Bootstrap's padding */
+}
+
+/* Card image */
+.guide-image {
+  width: 100%;
+  height: 180px; /* Adjust based on image aspect ratio */
+  object-fit: cover;
+  border-bottom: 1px solid #dee2e6; /* Divider line */
+}
+
+/* Card content */
+.guide-details {
+  text-align: center;
+}
+
+/* Guide name */
+.guide-name {
+  font-size: 1.25rem; /* Bootstrap's font-size for larger headings */
+  font-weight: 500; /* Bootstrap's font-weight for medium emphasis */
+  margin-bottom: 0.5rem; /* Spacing between elements */
+}
+
+/* Experience and status text */
+.guide-experience,
+.guide-status {
+  margin-bottom: 0.25rem; /* Spacing between lines */
+  color: #6c757d; /* Bootstrap's text-muted color */
+}
+
+/* Hover effect for card */
+.guide-card:hover {
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2); /* Bootstrap's larger shadow on hover */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .guide-selection {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .guide-card {
+    width: 100%; /* Full width on small screens */
+    max-width: 500px; /* Optional max-width */
+  }
+}

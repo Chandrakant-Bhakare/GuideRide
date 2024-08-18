@@ -1,0 +1,132 @@
+/* General Navbar Styles */
+.navbar {
+    background-color:rgb(222, 230, 228); /* Background color of the navbar */
+    padding: 1rem; /* Padding around the navbar */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for a subtle effect */
+  }
+  
+  .container-fluid {
+    max-width: 1200px; /* Maximum width of the container */
+    margin: 0 auto; /* Center the container */
+  }
+  
+  .upper-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+  }
+  
+  /* Logo and Company Name */
+  .logo-container {
+    display: flex;
+    align-items: center;
+    flex: 1; /* Allow logo and name to take up space */
+  }
+  
+  .logo {
+    height: 50px; /* Adjust logo size */
+    margin-right: 1rem; /* Space between logo and company name */
+  }
+  
+  .company-name {
+    margin: 0;
+    font-size: 24px; /* Font size for the company name */
+    color: #333; /* Text color */
+    text-decoration:none;
+  }
+  .Userlogo{
+   max-height: 35px;
+  }
+  /* Navbar Links */
+  .nav-links {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; /* Allow links to wrap on smaller screens */
+  }
+  
+  .nav-link {
+    margin: 0 1rem; /* Spacing between links */
+    text-decoration: none; /* Remove underline from links */
+    color: #333; /* Link color */
+    font-size: 16px; /* Font size for links */
+    transition: color 0.3s; /* Smooth color transition on hover */
+  }
+  
+  .nav-link:hover {
+    color: #007bff; /* Change color on hover */
+  }
+  
+  /* Profile Menu */
+  .profile-menu {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; /* Allow profile menu items to wrap */
+  }
+  
+  .logout-button {
+    background: none;
+    border: none;
+    color: #007bff; /* Color for the logout button */
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 1rem; /* Space between menu items */
+  }
+  
+  .logout-button:hover {
+    text-decoration: underline; /* Underline on hover */
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 992px) {
+    .logo-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .logo {
+      margin-bottom: 0.5rem; /* Space between logo and company name */
+    }
+  
+    .company-name {
+      font-size: 20px; /* Adjust font size for smaller screens */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .nav-links {
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%; /* Ensure links take full width */
+    }
+  
+    .nav-link {
+      margin: 0.5rem 0; /* Adjust spacing for smaller screens */
+    }
+  
+    .profile-menu {
+      margin-top: 1rem; /* Space between links and profile menu */
+      width: 100%; /* Ensure profile menu takes full width */
+      justify-content: flex-start; /* Align items to start */
+    }
+  
+    .logout-button {
+      margin-left: 0; /* Remove left margin on smaller screens */
+      margin-top: 0.5rem; /* Add top margin for logout button */
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .company-name {
+      font-size: 18px; /* Further reduce font size on very small screens */
+    }
+  
+    .logo {
+      height: 40px; /* Reduce logo size on very small screens */
+    }
+  
+    .nav-link {
+      font-size: 14px; /* Reduce font size for links on very small screens */
+    }
+  }
+  

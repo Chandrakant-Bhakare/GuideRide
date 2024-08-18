@@ -1,0 +1,74 @@
+/* Container for the car rentals section */
+.car-rentals-container {
+    padding: 2rem;
+    background-color: #f8f9fa; /* Light background color */
+    color: #333; /* Dark text color for contrast */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    max-width: 1200px; /* Limit the width */
+    margin: auto; /* Center the container */
+  }
+  
+  /* Header styles */
+  .car-rentals-header {
+    text-align: center;
+    padding: 2rem;
+    background-color: #007bff; /* Bright blue background */
+    color: #fff; /* White text color */
+    border-radius: 8px; /* Rounded corners */
+  }
+  
+  /* Heading styles */
+  .car-rentals-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Paragraph styles */
+  .car-rentals-header p {
+    font-size: 1.2rem;
+    margin: 0;
+  }
+  
+  /* Responsive design for mobile devices */
+  @media (max-width: 768px) {
+    .car-rentals-header h1 {
+      font-size: 2rem;
+    }
+  
+    .car-rentals-header p {
+      font-size: 1rem;
+    }
+  }
+
+/* Container for the fleet of cars */
+.fleet-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem; /* Space between car components */
+    padding: 2rem; /* Padding around the container */
+    background-color: #f8f9fa; /* Light background color for the section */
+  }
+  
+  /* Style for individual car components */
+  .fleet-container app-cars {
+    flex: 1 1 calc(33.333% - 1.5rem); /* Three components per row with gap consideration */
+    max-width: calc(33.333% - 1.5rem); /* Limit the width of each component */
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+  }
+  
+  /* Responsive design */
+  @media (max-width: 1024px) {
+    .fleet-container app-cars {
+      flex: 1 1 calc(50% - 1.5rem); /* Two components per row on medium screens */
+      max-width: calc(50% - 1.5rem); /* Limit the width of each component */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .fleet-container app-cars {
+      flex: 1 1 100%; /* Full width on smaller screens */
+      max-width: 100%; /* Limit the width of each component */
+    }
+  }
+  

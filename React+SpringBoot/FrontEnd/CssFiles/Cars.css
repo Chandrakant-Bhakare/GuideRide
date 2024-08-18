@@ -1,0 +1,50 @@
+.car-selection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.car_card{
+  background-color: rgb(242, 236, 225);
+  color: black;
+  width: 700px;
+  display: flex;
+  padding: 10px 5px;
+  align-items: center;
+  justify-content:space-between;
+  border-radius: 20px;
+}
+.car-image {
+  width: 200px; /* Adjust as needed */
+  height: 165px; /* Adjust as needed */
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+
+
+.car-name {
+  font-size: 1.5em;
+  margin: 0;
+}
+
+.car-number,
+.car-owner,
+.car-status,
+.car-fair {
+  margin: 5px 0;
+}
+
+.book-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.book-button:hover {
+  background-color: #0056b3;
+}

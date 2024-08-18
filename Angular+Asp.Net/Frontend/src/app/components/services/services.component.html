@@ -1,0 +1,81 @@
+  <!-- Services Section -->
+  <div class="services-container">
+    <header class="services-header">
+        <h1>Our Services</h1>
+        <p>Discover the premium services that make GuideRide your perfect travel partner.</p>
+    </header>
+
+    <!-- Services Overview -->
+    <section class="services-overview">
+        <h2>Exceptional Experiences Await</h2>
+        <p>From luxurious car rentals to exclusive guided tours, our services are designed to provide you with the ultimate travel experience.</p>
+    </section>
+
+    <!-- Carousel -->
+    <section class="services-carousel">
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="carousel-item">
+                    <div class="carousel-content">
+                        <img src="./Assests/Car10.jpeg" alt="Luxury Car Rentals">
+                        <h3>Luxury Car Rentals</h3>
+                        <p>Experience elegance and comfort with our top-of-the-line vehicles.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-content">
+                        <img src="./Assests/Car10.jpeg" alt="Guided Tours">
+                        <h3>Guided Tours</h3>
+                        <p>Explore new places with expert guides who know the hidden gems.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-content">
+                        <img src="./Assests/Car10.jpeg" alt="Special Packages">
+                        <h3>Special Packages</h3>
+                        <p>Tailored packages to make your travel unforgettable.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-button prev">&lt;</button>
+            <button class="carousel-button next">&gt;</button>
+        </div>
+    </section>
+</div>
+
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    const carousel = document.querySelector('.carousel');
+    const prevButton = document.querySelector('.prev');
+    const nextButton = document.querySelector('.next');
+    let index = 0;
+    const items = document.querySelectorAll('.carousel-item');
+    const totalItems = items.length;
+
+    function updateCarousel() {
+        const itemWidth = items[0].offsetWidth;
+        carousel.style.transform = `translateX(-${index * itemWidth}px)`;
+        items.forEach((item, i) => {
+            item.style.opacity = (i === index) ? '1' : '0.5';
+            item.style.transform = (i === index) ? 'scale(1)' : 'scale(0.95)';
+        });
+    }
+
+    prevButton.addEventListener('click', function() {
+        index = (index > 0) ? index - 1 : totalItems - 1;
+        updateCarousel();
+    });
+
+    nextButton.addEventListener('click', function() {
+        index = (index < totalItems - 1) ? index + 1 : 0;
+        updateCarousel();
+    });
+
+    // Initialize carousel
+    updateCarousel();
+});
+
+
+</script>

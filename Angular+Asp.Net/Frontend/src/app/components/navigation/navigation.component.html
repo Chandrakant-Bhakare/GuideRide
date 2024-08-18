@@ -1,0 +1,61 @@
+<header>
+    <div class="logo">GuideRide</div>
+    <nav>
+        <ul>
+            <li *ngIf="!isAdmin"><a routerLink = "/home" routerLinkActive="active" >Home</a></li>
+            <li *ngIf="!isAdmin"><a routerLink = "/about" routerLinkActive="active">About Us</a></li>
+            
+            <li *ngIf="!isAdmin"><a routerLink = "/fleet" routerLinkActive="active">Fleet</a></li>
+            <li *ngIf="isAdmin"><a routerLink = "/adminhome" routerLinkActive="active">Home</a></li>
+            <li *ngIf="!isAdmin"><a routerLink = "/contact" routerLinkActive="active">Contact Us</a></li>     
+            <li *ngIf="isAdmin"><a routerLink="/user-management" routerLinkActive="active">User Details</a></li>      
+            <li *ngIf="isAdmin"><a routerLink="/guide-management" routerLinkActive="active">Guide Management</a></li>
+            <li *ngIf="isAdmin"><a routerLink="/car-management" routerLinkActive="active">Car Management</a></li>
+
+            <li *ngIf="!isAdmin && isLoggedIn"><a routerLink="/profile">Profile</a></li>
+            
+            <li *ngIf="!isAdmin && isLoggedIn"><a routerLink="/order-details">Orders Detils</a></li>
+            <li *ngIf="!isAdmin && isLoggedIn"><a routerLink="/car-availability">Car Availability</a></li>
+            <li *ngIf="!isAdmin && isLoggedIn"><a routerLink="/guide-availability">Guide Availability</a></li>
+
+
+            <li *ngIf="!isLoggedIn"><a routerLink="/login">Login</a></li>
+            <li *ngIf="!isLoggedIn"><a routerLink="signin">Signup</a></li>
+            <li *ngIf="isLoggedIn"><a (click)="logout()">Logout</a></li>
+                
+        </ul>
+    </nav>
+</header>
+<!-- <header>
+<nav>
+    <ul>
+      <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+      <li *ngIf="!isAdmin">
+        <a routerLink="/about" routerLinkActive="active">About</a>
+      </li>
+      <li *ngIf="!isAdmin">
+        <a routerLink="/contact" routerLinkActive="active">Contact</a>
+      </li>
+      <li *ngIf="!isAdmin">
+        <a routerLink="/fleet" routerLinkActive="active">Fleet</a>
+      </li>
+      <li *ngIf="!isAdmin">
+        <a routerLink="/services" routerLinkActive="active">Services</a>
+      </li>
+      <li *ngIf="!isAdmin">
+        <a routerLink="/signup" routerLinkActive="active">signup</a>
+      </li>
+      
+      <li *ngIf="isAdmin">
+        <a routerLink="/guide-management" routerLinkActive="active">Guide Management</a>
+      </li>
+      <li *ngIf="isAdmin">
+        <a routerLink="/car-management" routerLinkActive="active">Car Management</a>
+      </li>
+      <li *ngIf="isLoggedIn">
+        <a (click)="logout()">Logout</a>
+      </li>
+    </ul>
+  </nav>
+</header> -->
+  

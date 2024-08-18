@@ -1,0 +1,31 @@
+<div class="order-container">
+  <h1>Booking Details</h1>
+  <table class="order-table">
+    <thead>
+      <tr>
+        <th>S. No.</th>
+        <th>Booking ID</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Total Amount</th>
+        <th>Guide Name</th>
+        <th>Number of Days</th>
+        <th>Bill</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let booking of bookingDetails; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ booking.id }}</td>
+        <td>{{ booking.startDate | date }}</td>
+        <td>{{ booking.endDate | date }}</td>
+        <td>{{ booking.totalAmount | currency }}</td>
+        <td>{{ booking.guide.name }}</td>
+        <td>{{ booking.numberOfDays }}</td>
+        <td>
+          <button (click)="storeBookingIdAndNavigate(booking.id)" class="home-link">Pay</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

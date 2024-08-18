@@ -1,0 +1,13 @@
+<div *ngIf="car" class="car-details">
+  <div class="car-image">
+    <img [src]="car.image" alt="{{ car.modelName }}" />
+  </div>
+  <div class="car-info">
+    <h2>{{ car.modelName }}</h2>
+    <p><strong>Registration No:</strong> {{ car.registrationNo }}</p>
+    <p><strong>Price Type:</strong> {{ car.priceType }}</p>
+    <p><strong>Fare:</strong> {{ car.fare | currency }}</p>
+    <p><strong>Status:</strong> {{ car.status }}</p>
+  </div>
+  <button (click)="bookNow()" class="book-now-btn">Book Now</button>
+</div>

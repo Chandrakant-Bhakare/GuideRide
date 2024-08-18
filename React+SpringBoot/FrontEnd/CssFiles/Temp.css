@@ -1,0 +1,253 @@
+/* Global Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+/* Hero Section */
+.hero-section {
+    background: url('GuideRide/Assets/Assests/hero.jpeg') no-repeat center center/cover;
+    color: #fff;
+    padding: 100px 20px;
+    text-align: center;
+}
+
+.hero-section .hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.hero-section .hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.hero-section .button-link, .cta-secondary {
+    background-color: #ff6347;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.hero-section .cta-secondary {
+    background-color: #4CAF50;
+    margin-left: 15px;
+}
+
+.hero-section .button-link:hover, .cta-secondary:hover {
+    background-color: #e5533c;
+}
+
+/* Services Section */
+.services-section {
+    padding: 50px 20px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.services-section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.services-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.service {
+    flex: 1;
+    max-width: 300px;
+    margin: 20px;
+    text-align: center;
+}
+
+.service img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.service h3 {
+    margin-top: 15px;
+    font-size: 1.5rem;
+}
+
+.service p {
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+/* Fleet Section */
+.fleet-section {
+    padding: 50px 20px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.fleet-section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.fleet-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.car {
+    flex: 1;
+    max-width: 300px;
+    margin: 20px;
+    text-align: center;
+}
+
+.car img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.car h3 {
+    margin-top: 15px;
+    font-size: 1.5rem;
+}
+
+.car p {
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+/* Why Choose Us Section */
+.why-choose-us {
+    padding: 50px 20px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.why-choose-us h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.features-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.feature {
+    flex: 1;
+    max-width: 300px;
+    margin: 20px;
+    text-align: center;
+}
+
+.feature h3 {
+    margin-top: 15px;
+    font-size: 1.5rem;
+}
+
+.feature p {
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+/* Popular Destinations Section */
+.popular-destinations {
+    padding: 50px 20px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.popular-destinations h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.destinations-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.destination {
+    flex: 1;
+    max-width: 300px;
+    margin: 20px;
+    text-align: center;
+}
+
+.destination img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.destination h3 {
+    margin-top: 15px;
+    font-size: 1.5rem;
+}
+
+/* Call-to-Action Banner */
+.cta-banner {
+    padding: 50px 20px;
+    background-color: #ff6347;
+    color: #fff;
+    text-align: center;
+}
+
+.cta-banner h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.cta-banner .cta-primary {
+    background-color: #fff;
+    color: #ff6347;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.cta-banner .cta-primary:hover {
+    background-color: #e5533c;
+    color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .services-container, .fleet-container, .features-container, .destinations-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .service, .car, .feature, .destination {
+        max-width: 100%;
+        margin: 10px 0;
+    }
+
+    .hero-section {
+        padding: 70px 20px;
+    }
+
+    .hero-section .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-section .hero-content p {
+        font-size: 1rem;
+    }
+}

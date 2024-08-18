@@ -1,0 +1,12 @@
+<!-- Conditionally render content based on the route -->
+<app-navigation></app-navigation>
+
+<!-- Home Content: Display only on the root route -->
+<div *ngIf="showHomeContent" class="home-content">
+  <h1>Welcome to GuideRide</h1>
+  <img src="https://watermark.lovepik.com/photo/40089/6528.jpg_wh1200.jpg" alt="Hero Image" class="hero-image"/>
+  <!-- Add more content here as needed -->
+</div>
+
+<!-- Router Outlet: Renders routed components -->
+<router-outlet></router-outlet>

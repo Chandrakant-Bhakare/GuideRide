@@ -1,0 +1,55 @@
+<div class="bill-container">
+  <h1>Booking Bill</h1>
+  <div class="bill-details">
+    <div class="bill-item">
+      <span class="bill-label">Booking ID:</span>
+      <span class="bill-value">{{ billDetails.bookingId }}</span>
+    </div>
+    <div class="bill-item">
+      <span class="bill-label">Guide Name:</span>
+      <span class="bill-value">{{ billDetails.guideName }}</span>
+    </div>
+    <div class="bill-item">
+      <span class="bill-label">Car Model:</span>
+      <span class="bill-value">{{ billDetails.carModel }}</span>
+    </div>
+    <div class="bill-item">
+      <span class="bill-label">Customer Name:</span>
+      <span class="bill-value">{{ billDetails.customerName }}</span>
+    </div>
+    <div class="bill-item">
+      <span class="bill-label">Start Date:</span>
+      <span class="bill-value">{{ billDetails.startDate | date }}</span>
+    </div>
+    <div class="bill-item">
+      <span class="bill-label">End Date:</span>
+      <span class="bill-value">{{ billDetails.endDate | date }}</span>
+    </div>
+    <div class="bill-item">
+      <span class="bill-label">Number of Days:</span>
+      <span class="bill-value">{{ billDetails.numberOfDays }}</span>
+    </div>
+    <div class="bill-item">
+      <span class="bill-label">Car Fare Per Day:</span>
+      <span class="bill-value">{{ billDetails.carFarePerDay | currency }}</span>
+    </div>
+    <div class="bill-item">
+      <span class="bill-label">Guide Fare Per Day:</span>
+      <span class="bill-value">{{ billDetails.guideFarePerDay | currency }}</span>
+    </div>
+    <div class="bill-item">
+      <span class="bill-label">Platform Fee:</span>
+      <span class="bill-value">{{ billDetails.platformFee | currency }}</span>
+    </div>
+    <div class="bill-item">
+      <span class="bill-label">Total Amount:</span>
+      <span class="bill-value">{{ billDetails.totalAmount | currency }}</span>
+    </div>
+    <div class="bill-item">
+      <span class="bill-label">Date:</span>
+      <span class="bill-value">{{ billDetails.date | date }}</span>
+      
+    </div>
+    <button><a routerLink="/payment-form" routerLinkActive="active" class="button-link">Pay Now !</a></button>
+  </div>
+</div>

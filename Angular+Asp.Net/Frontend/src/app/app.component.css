@@ -1,0 +1,29 @@
+/* Styles for the hero image */
+.hero-image {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    max-height: 400px; /* Adjust as needed */
+    object-fit: cover; /* Cover the container without distortion */
+    display: block; /* Ensure image block-level behavior */
+    margin: 0 auto; /* Center the image */
+  }
+  
+  /* Additional styles for home content */
+  .home-content {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .home-content h1 {
+    font-size: 2.5rem;
+    color: #007bff;
+    margin-bottom: 20px; /* Add margin below heading */
+  }
+  
+  .home-content img {
+    max-width: 100%; /* Ensure image does not overflow */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Ensure image block-level behavior */
+    margin: 0 auto; /* Center the image */
+  }
+  

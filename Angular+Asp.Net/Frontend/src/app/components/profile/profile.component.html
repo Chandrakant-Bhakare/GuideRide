@@ -1,0 +1,16 @@
+<div class="profile-container">
+  <h1>User Profile</h1>
+  <div class="profile-card">
+    <div class="profile-image">
+      
+    </div>
+    <div class="profile-info">
+      <p><strong>Name:</strong> {{ user.name }}</p>
+      <p><strong>City:</strong> {{ user.address }}</p>
+      <p><strong>Date of Birth:</strong> {{ user.dateOfBirth }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      
+    </div>
+    <button (click)="editProfile()" class="edit-button">Edit Profile</button>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="cars-container">
+  <h1>Available Cars</h1>
+  <div class="cars-grid">
+    <div class="car-card" *ngFor="let car of cars">
+      <img src="https://cdni.autocarindia.com/Utils/ImageResizerV2.ashx?n=https://cms.haymarketindia.net/model/uploads/modelimages/Hyundai-Grand-i10-Nios-200120231541.jpg&w=373&h=245&q=75&c=1" alt="{{ car.modelName }}" class="car-image"/>
+      <div class="car-info">
+        <h2>{{ car.modelName }}</h2>
+        <p>Registration Number: {{ car.registrationNumber }}</p>
+        <p>Fare per day: {{ car.fare | currency }}</p>
+        <button (click)="viewDetails(car)" class="view-details-btn">Book</button>
+      </div>
+    </div>
+  </div>
+</div>

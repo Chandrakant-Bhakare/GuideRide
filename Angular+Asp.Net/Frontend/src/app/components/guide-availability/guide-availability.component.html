@@ -1,0 +1,29 @@
+<div class="guide-container">
+  <h1>Available Guides</h1>
+  <table class="guide-table">
+    <thead>
+      <tr>
+        <th>S. No.</th>
+        <th>Guide ID</th>
+        <th>Name</th>
+        <th>Fare per Day</th>
+        <th>Rating</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let guide of guides; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ guide.id }}</td>
+        <td>{{ guide.name }}</td>
+        <td>{{ guide.fare }}</td>
+        <td>{{ guide.rating }}</td>
+        <td>Available</td>
+        <td>
+          <button (click)="bookGuide(guide)" class="book-guide-btn"><a routerLink="/book" routerLinkActive="active" class="button-link">BookRide !</a></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

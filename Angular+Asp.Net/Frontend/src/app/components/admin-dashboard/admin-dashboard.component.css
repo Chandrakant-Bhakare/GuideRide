@@ -1,0 +1,62 @@
+
+.landing-container {
+    font-family: Arial, sans-serif;
+    margin-top: 20px;
+  }
+  
+  .landing-header {
+    background: url('../../../../public/Assests/hero.jpeg') no-repeat center center/cover;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    height: 68vh;
+  }
+  
+
+  .hero-section {
+    margin: 50px 0;
+  }
+  
+  .hero-section h1 {
+    font-size: 48px;
+    margin-top: 156px;
+    color: white;
+  }
+  
+  .hero-section p {
+    font-size: 18px;
+    margin: 20px 0;
+  }
+  
+  .hero-section button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .features {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+  }
+  
+  .feature {
+    text-align: center;
+    width: 30%;
+  }
+  
+  .feature img {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  .footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+  }
+  
